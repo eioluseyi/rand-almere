@@ -1,0 +1,34 @@
+.infinite-carousel {
+  display: flex;
+  overflow: hidden;
+  gap: var(--gap, 0px);
+
+  &.carousel-reverse {
+    --_animation-direction: reverse;
+  }
+
+  > * {
+    --_gap: var(--gap, 0px);
+    --_animation-duration: var(--animation-duration, 150s);
+    animation: scroll-carousel var(--_animation-duration) linear
+      var(--_animation-direction, forwards) infinite;
+  }
+}
+
+@property --_animation-duration {
+  syntax: "<time>";
+  inherits: false;
+  initial-value: 150s;
+}
+
+@property --_gap {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes scroll-carousel {
+  to {
+    translate: calc(-100% - var(--_gap, 0px)) 0px;
+  }
+}
